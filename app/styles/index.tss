@@ -1,52 +1,56 @@
-".container": {
-  backgroundColor:"white"
+'.container': {
+  backgroundColor:'white'
 },
-"Label": {
+'Label': {
   width: Ti.UI.SIZE,
   height: Ti.UI.SIZE,
-  color: "#000"
+  color: '#000'
 },
-"#mapview": {
+'#mapview': {
   top: 0,
-  height: "170dp"
+  height: '170dp'
 },
-"#stations": {
-  top: "170dp",
-  bottom: 0,
-  layout: 'vertical'
+'#stationList': {
+  top: '170dp',
 },
-".station": {
+'.station': {
   width: Ti.UI.FILL,
   layout: 'composite',
-  height: "60dp"
+  height: '60dp'
 },
-".divider": {
-  height: "1dp",
-  backgroundColor: "#BBBBBB",
+'.divider': {
+  height: '1dp',
+  backgroundColor: '#BBBBBB',
   width: Ti.UI.FILL
 },
-".numBikes": {
-  color: "#0000FF",
-  top: "15dp",
-  left: "10dp",
-  width: "45dp",
+'.numBikes': {
+  color: '#0000FF',
+  top: '15dp',
+  left: '10dp',
+  width: '45dp',
   font: {
     fontSize: '30dp',
   },
   textAlign: 'center'
 },
-".stationName": {
-  width: "200dp",
-  top: "25dp",
+'.stationName': {
+  width: '200dp',
+  top: '25dp',
   font: {
     fontSize: '14dp',
   }
 },
-".eta": {
-  top: "25dp",
-  right: "15dp",
+'.eta': {
+  top: '25dp',
+  right: '15dp',
   font: {
     fontSize: '12dp',
   },
-  color: "#0000FF"
+  color: '#0000FF'
+},
+'.template1[platform=ios]' : {
+  height: '56dp'
+},
+'.template1[platform=android]' : {
+  height: Ti.UI.SIZE
 }

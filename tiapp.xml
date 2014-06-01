@@ -39,7 +39,9 @@
         </plist>
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
+        <tool-api-level>14</tool-api-level>
         <manifest>
+            <application android:hardwareAccelerated="true" android:theme="@style/Theme.Holo" ></application>
             <!-- Allows the API to download data from Google Map servers -->
             <uses-permission android:name="android.permission.INTERNET"/>
             <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -56,10 +58,10 @@
             <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
             <uses-permission android:name="com.adampash.bikes.permission.MAPS_RECEIVE"/>
             <permission
-                android:name="com.adampash.bikes.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
+            android:name="com.adampash.bikes.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
             <application>
                 <meta-data
-                    android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBrS9f6Z2Fvff7UInmqcNqzNrgJf2Gsbfs"/>
+                android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBrS9f6Z2Fvff7UInmqcNqzNrgJf2Gsbfs"/>
             </application>
         </manifest>
     </android>

@@ -1,52 +1,42 @@
 <Alloy>
-  <Window class="container">
-    <View id="mapview" ns="Alloy.Globals.Map" animate="true" userLocation="true" />
-    <View id="stations">
-      <View class="station" stationId="0" id="firstStation" onClick="focusStation">
-        <Label class="numBikes">
-        </Label>
-        <Label class="stationName">
-          Loading...
-        </Label>
-        <Label class="eta">
-        </Label>
-      </View>
-      <View class="divider"></View>
-      <View class="station" stationId="1" onClick="focusStation">
-        <Label class="numBikes">
-        </Label>
-        <Label class="stationName">
-        </Label>
-        <Label class="eta">
-        </Label>
-      </View>
-      <View class="divider"></View>
-      <View class="station" stationId="2" onClick="focusStation">
-        <Label class="numBikes">
-        </Label>
-        <Label class="stationName">
-        </Label>
-        <Label class="eta">
-        </Label>
-      </View>
-      <View class="divider"></View>
-      <View class="station" stationId="3" onClick="focusStation">
-        <Label class="numBikes">
-        </Label>
-        <Label class="stationName">
-        </Label>
-        <Label class="eta">
-        </Label>
-      </View>
-      <View class="divider"></View>
-      <View class="station" stationId="4" onClick="focusStation">
-        <Label class="numBikes">
-        </Label>
-        <Label class="stationName">
-        </Label>
-        <Label class="eta">
-        </Label>
-      </View>
-    </View>
-  </Window>
+    <NavigationWindow  id='mainWindow' platform='ios'  class='container'>
+        <Window title='BikeFinder' class='container' top='40dp'>
+            <View id='mapview' ns='Alloy.Globals.Map' animate='true' userLocation='true' />
+
+            <!-- main list view -->
+            <ListView id='stationList' defaultItemTemplate='template1'>
+                <Templates>
+                    <!-- main template for displaying the list items -->
+                    <ItemTemplate  id='template1' name='template1'  class='template1'>
+                        <Label bindId='numBikes' class='numBikes'></Label>
+                        <Label bindId='stationName' class='stationName'></Label>
+                        <Label bindId='eta' class='eta'></Label>
+                    </ItemTemplate>
+                </Templates>
+                <!-- we only have one section and the items are contstucted using template1 -->
+                <ListSection id='section' >
+                    <ListItem template='template1' />
+                </ListSection>
+            </ListView>
+        </Window>
+    </NavigationWindow>
+    <Window id='mainWindow'  title='BikeFinder' class='container'   platform='android'  onOpen='doOpen'>
+        <View id='mapview' ns='Alloy.Globals.Map' animate='true' userLocation='true' />
+
+        <!-- main list view -->
+        <ListView id='stationList' defaultItemTemplate='template1'>
+            <Templates>
+                <!-- main template for displaying the list items -->
+                <ItemTemplate  id='template1' name='template1'  class='template1'>
+                    <Label bindId='numBikes' class='numBikes'></Label>
+                    <Label bindId='stationName' class='stationName'></Label>
+                    <Label bindId='eta' class='eta'></Label>
+                </ItemTemplate>
+            </Templates>
+            <!-- we only have one section and the items are contstucted using template1 -->
+            <ListSection id='section' >
+                <ListItem template='template1' />
+            </ListSection>
+        </ListView>
+    </Window>
 </Alloy>
