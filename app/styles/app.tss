@@ -1,4 +1,4 @@
-".container": {
+'.container': {
   font: {
     fontFamily:'Helvetica',
     fontSize: '14dp',
@@ -6,6 +6,9 @@
     fontWeight: 'normal'
   }
 },
-"Window": {
+'Window': {
   navBarHidden: false
+},
+'ListView[platform=android]' : {
+  separatorColor : '#CCC'
 }
