@@ -167,25 +167,26 @@ function initialize() {
   });
 }
 
+/**
+ * used by android for the menubar and title
+ */
 function doOpen() {
-  if (OS_ANDROID) {
-    var activity = $.getView().activity;
-    var actionBar = activity.actionBar;
+  var activity = $.getView().activity;
+  var actionBar = activity.actionBar;
 
-    activity.onCreateOptionsMenu = function(_event) {
+  activity.onCreateOptionsMenu = function(_event) {
 
-      if (actionBar) {
-        actionBar.displayHomeAsUp = true;
-        actionBar.title = 'Bike Finder App';
-        actionBar.onHomeIconItemSelected = function() {
-          $.getView().close();
-        };
-      } else {
-        alert('No Action Bar Found');
-      }
+    if (actionBar) {
+      actionBar.displayHomeAsUp = true;
+      actionBar.title = 'Bike Finder App';
+      actionBar.onHomeIconItemSelected = function() {
+        $.getView().close();
+      };
+    } else {
+      alert('No Action Bar Found');
+    }
 
-    };
-  }
+  };
 };
 
 Ti.App.addEventListener('resumed', function() {

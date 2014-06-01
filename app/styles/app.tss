@@ -7,5 +7,5 @@
   }
 },
 "Window": {
-  navBarHidden: true
+  navBarHidden: false
 }
