@@ -9,6 +9,9 @@ nearestStations = [];
 /* current user location */
 myLocation = null;
 
+/* interval id for refreshing application */
+var updateIntervalId = null;
+
 /**
  *
  */
@@ -24,47 +27,46 @@ focusStation = function(event) {
 };
 
 /**
- * 
+ *
  * sets the specified map region to fit the annotations provided
- * 
+ *
  * @param {Ti.Map} _map
  * @param {Array} _annotations
  */
-function zoomToFit(_map,_annotations) {
-    var latMax, latMin, lngMax, lngMin;
+function zoomToFit(_map, _annotations) {
+  var latMax, latMin, lngMax, lngMin;
 
-    for (var c = 0; c < _annotations.length; c++) {
+  for (var c = 0; c < _annotations.length; c++) {
 
-        var latitude = _annotations[c].latitude;
-        var longitude = _annotations[c].longitude;
+    var latitude = _annotations[c].latitude;
+    var longitude = _annotations[c].longitude;
 
-        latMax = Math.max(latMax || latitude, latitude);
-        latMin = Math.min(latMin || latitude, latitude);
+    latMax = Math.max(latMax || latitude, latitude);
+    latMin = Math.min(latMin || latitude, latitude);
 
-        lngMax = Math.max(lngMax || longitude, longitude);
-        lngMin = Math.min(lngMin || longitude, longitude);
+    lngMax = Math.max(lngMax || longitude, longitude);
+    lngMin = Math.min(lngMin || longitude, longitude);
 
-    }
+  }
 
-    //create the map boundary area values
-    var bndLat = (latMax + latMin) / 2;
-    var bndLng = (lngMax + lngMin) / 2;
+  //create the map boundary area values
+  var bndLat = (latMax + latMin) / 2;
+  var bndLng = (lngMax + lngMin) / 2;
 
-    var bndLatDelta = latMax - latMin + 0.005;
-    var bndLngDelta = lngMax - lngMin + 0.005;
+  var bndLatDelta = latMax - latMin + 0.005;
+  var bndLngDelta = lngMax - lngMin + 0.005;
 
-    //create the map region definition for the boundaries containing the sites
-    var mapRegionSites = {
-        latitude : bndLat,
-        longitude : bndLng,
-        animate : true,
-        latitudeDelta : bndLatDelta,
-        longitudeDelta : bndLngDelta
-    };
-    
-      _map.setRegion(mapRegionSites);
+  //create the map region definition for the boundaries containing the sites
+  var mapRegionSites = {
+    latitude : bndLat,
+    longitude : bndLng,
+    animate : true,
+    latitudeDelta : bndLatDelta,
+    longitudeDelta : bndLngDelta
+  };
+
+  _map.setRegion(mapRegionSites);
 };
-
 
 /**
  *
@@ -156,6 +158,7 @@ function createListView(_data) {
 }
 
 function initialize() {
+
   Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
   Ti.Geolocation.purpose = "Find the bikes nearest to you";
 
@@ -179,6 +182,15 @@ function initialize() {
       }
     });
   });
+
+  // update the information periodically, ONLY if it null.
+  // if it is not null then there is an active interval that can 
+  // continue toi be utilized
+  if (updateIntervalId === null) {
+    updateIntervalId = clearRefreshInterval(updateIntervalId);
+    updateIntervalId = setRefreshInterval();
+    Ti.API.info('updateIntervalId ' + updateIntervalId);
+  }
 }
 
 /**
@@ -187,6 +199,27 @@ function initialize() {
 function doOpen() {
   var activity = $.getView().activity;
   var actionBar = activity.actionBar;
+
+  activity.addEventListener('destroy', function(_event) {
+    Ti.API.info(JSON.stringify(_event));
+    updateIntervalId = clearRefreshInterval(updateIntervalId);
+  });
+
+  activity.addEventListener('pause', function(_event) {
+    Ti.API.info(JSON.stringify(_event));
+    updateIntervalId = clearRefreshInterval(updateIntervalId);
+  });
+
+  activity.addEventListener('resume', function(_event) {
+    Ti.API.info(JSON.stringify(_event));
+    Ti.API.info('activity.addEventListener:resumed');
+    return initialize();
+  });
+
+  activity.addEventListener('userleavehint', function(_event) {
+    Ti.API.info(JSON.stringify(_event));
+    updateIntervalId && clearInterval(updateIntervalId);
+  });
 
   activity.onCreateOptionsMenu = function(_event) {
 
@@ -203,13 +236,36 @@ function doOpen() {
   };
 };
 
-Ti.App.addEventListener('resumed', function() {
-  return initialize();
-});
+if (OS_IOS) {
+  Ti.App.addEventListener('resumed', function() {
+    Ti.API.info('Ti.App.addEventListener:resumed');
+    return initialize();
+  });
 
-setInterval(function() {
-  return initialize();
-}, 1000 * 60);
+  Ti.App.addEventListener('pause', function() {
+    Ti.API.info('Ti.App.addEventListener:pause');
+    updateIntervalId = clearRefreshInterval(updateIntervalId);
+  });
+}
+
+/**
+ * clears out the specified interval and sets the variable to null
+ */
+function clearRefreshInterval(_id) {
+  Ti.API.debug('clearRefreshInterval ' + _id);
+  _id && clearInterval(_id);
+  _id = null;
+  return null;
+}
+
+/**
+ *
+ */
+function setRefreshInterval() {
+  return setInterval(function() {
+    return initialize();
+  }, 1000 * 60);
+}
 
 // FOR DEBUGGING
 locate_bikes.setDebugLocation([40.70122128, -74.01234218]);
