@@ -129,6 +129,9 @@ function createListView(_data) {
       stationName : {
         text : _data[i].stationName
       },
+      stationDistance : {
+        text : "Distance: " + _data[i].distanceInMiles.toFixed(2) + " miles"
+      },
       eta : {
         text : 'Missing'
         // the data
