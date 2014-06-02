@@ -1,6 +1,14 @@
-Welcome to Bike Finder: forked from adampash/bikes_nearby_app
+Welcome to Bike Finder
 ====
-
+######forked from adampash/bikes_nearby_app
+####What's Here
+* ListView Integration
+* Map View for IOS and Android
+* Working with Geolocation Services
+* Working with HTTP Client
+* Integration of ActionBar on Android
+* Example of dealing for cross-platform UI issues in style and view layout
+* 
 ####Remember you will need to setup you Android Map to get this working
 
 See information here on the Appcelerator website
@@ -16,8 +24,5 @@ from Washington DC and it is too far to get any data to show
 locate_bikes.setDebugLocation([40.70122128, -74.01234218]);
 ```
 
-
-
-----------------------------------
 
 
