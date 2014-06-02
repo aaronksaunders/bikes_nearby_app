@@ -24,7 +24,7 @@
         </Window>
     </NavigationWindow>
     <Window id='mainWindow'  title='BikeFinder' class='container'   platform='android'  onOpen='doOpen'>
-        <View id='mapview' ns='Alloy.Globals.Map' animate='true' userLocation='true' />
+        <View id='mapview' ns='Alloy.Globals.Map' animate='true' userLocation='true'  top='0dp' />
 
         <!-- main list view -->
         <ListView id='stationList' defaultItemTemplate='template1'>
@@ -32,7 +32,7 @@
                 <!-- main template for displaying the list items -->
                 <ItemTemplate  id='template1' name='template1'  class='template1'>
                     <Label bindId='numBikes' class='numBikes'></Label>
-                    <View layout='vertical'>
+                    <View layout='vertical' height='Ti.UI.FILL' width='Ti.UI.SIZE'>
                         <Label bindId='stationName' class='stationName'></Label>
                         <Label bindId='stationDistance' class='stationDistance'></Label>
                     </View>

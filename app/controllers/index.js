@@ -1,4 +1,4 @@
-var drawPath, dropMarker, focusStation, initialize, locate_bikes, myLocation, nearestStations, zoomToFit;
+var drawPath, dropMarker, focusStation, initialize, locate_bikes, myLocation, nearestStations;
 
 /* library for getting bike information */
 locate_bikes = require('locate_bikes').bikes;
@@ -23,37 +23,48 @@ focusStation = function(event) {
   return activateStation(nearestStations[this.stationId], this.stationId);
 };
 
-zoomToFit = function(map, locations) {
-  var delta, lgDiff, location, ltDiff, maxLati, maxLongi, minLati, minLongi, total_locations, _i, _len;
-  total_locations = locations.length;
-  for ( _i = 0, _len = locations.length; _i < _len; _i++) {
-    location = locations[_i];
-    if (( typeof minLati === "undefined" || minLati === null) || minLati > location.latitude) {
-      minLati = location.latitude;
+/**
+ * 
+ * sets the specified map region to fit the annotations provided
+ * 
+ * @param {Ti.Map} _map
+ * @param {Array} _annotations
+ */
+function zoomToFit(_map,_annotations) {
+    var latMax, latMin, lngMax, lngMin;
+
+    for (var c = 0; c < _annotations.length; c++) {
+
+        var latitude = _annotations[c].latitude;
+        var longitude = _annotations[c].longitude;
+
+        latMax = Math.max(latMax || latitude, latitude);
+        latMin = Math.min(latMin || latitude, latitude);
+
+        lngMax = Math.max(lngMax || longitude, longitude);
+        lngMin = Math.min(lngMin || longitude, longitude);
+
     }
-    if (( typeof minLongi === "undefined" || minLongi === null) || minLongi > location.longitude) {
-      minLongi = location.longitude;
-    }
-    if (( typeof maxLati === "undefined" || maxLati === null) || maxLati < location.latitude) {
-      maxLati = location.latitude;
-    }
-    if (( typeof maxLongi === "undefined" || maxLongi === null) || maxLongi < location.longitude) {
-      maxLongi = location.longitude;
-    }
-  }
-  ltDiff = maxLati - minLati;
-  lgDiff = maxLongi - minLongi;
-  delta = ltDiff > lgDiff ? ltDiff : lgDiff;
-  if (total_locations > 0 && delta > 0) {
-    return map.setLocation({
-      animate : true,
-      latitude : (maxLati + minLati) / 2,
-      longitude : (maxLongi + minLongi) / 2,
-      latitudeDelta : delta * 2,
-      longitudeDelta : delta * 2
-    });
-  }
+
+    //create the map boundary area values
+    var bndLat = (latMax + latMin) / 2;
+    var bndLng = (lngMax + lngMin) / 2;
+
+    var bndLatDelta = latMax - latMin + 0.005;
+    var bndLngDelta = lngMax - lngMin + 0.005;
+
+    //create the map region definition for the boundaries containing the sites
+    var mapRegionSites = {
+        latitude : bndLat,
+        longitude : bndLng,
+        animate : true,
+        latitudeDelta : bndLatDelta,
+        longitudeDelta : bndLngDelta
+    };
+    
+      _map.setRegion(mapRegionSites);
 };
+
 
 /**
  *
