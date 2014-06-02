@@ -1,5 +1,5 @@
 '.container': {
-  backgroundColor:'white'
+  backgroundColor: 'white'
 },
 'Label': {
   width: Ti.UI.SIZE,
@@ -11,7 +11,7 @@
   height: '170dp'
 },
 '#stationList': {
-  top: '170dp',
+  top: '170dp'
 },
 '.station': {
   width: Ti.UI.FILL,
@@ -29,28 +29,35 @@
   left: '10dp',
   width: '45dp',
   font: {
-    fontSize: '30dp',
+    fontSize: '30dp'
   },
   textAlign: 'center'
 },
 '.stationName': {
   width: '200dp',
-  top: '25dp',
+  top: '15dp',
   font: {
-    fontSize: '14dp',
+    fontSize: '14dp'
+  }
+},
+'.stationDistance': {
+  width: '200dp',
+  top: '2dp',
+  font: {
+    fontSize: '10dp'
   }
 },
 '.eta': {
   top: '25dp',
   right: '15dp',
   font: {
-    fontSize: '12dp',
+    fontSize: '12dp'
   },
   color: '#0000FF'
 },
-'.template1[platform=ios]' : {
+'.template1[platform=ios]': {
   height: '56dp'
 },
-'.template1[platform=android]' : {
+'.template1[platform=android]': {
   height: Ti.UI.SIZE
 }

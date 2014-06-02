@@ -1,6 +1,6 @@
 <Alloy>
     <NavigationWindow  id='mainWindow' platform='ios'  class='container'>
-        <Window title='BikeFinder' class='container' top='40dp'>
+        <Window title='BikeFinder' class='container' top='0dp'>
             <View id='mapview' ns='Alloy.Globals.Map' animate='true' userLocation='true' />
 
             <!-- main list view -->
@@ -9,7 +9,10 @@
                     <!-- main template for displaying the list items -->
                     <ItemTemplate  id='template1' name='template1'  class='template1'>
                         <Label bindId='numBikes' class='numBikes'></Label>
-                        <Label bindId='stationName' class='stationName'></Label>
+                        <View layout='vertical' height='Ti.UI.FILL' width='Ti.UI.SIZE'>
+                            <Label bindId='stationName' class='stationName'></Label>
+                            <Label bindId='stationDistance' class='stationDistance'></Label>
+                        </View>
                         <Label bindId='eta' class='eta'></Label>
                     </ItemTemplate>
                 </Templates>
@@ -29,7 +32,10 @@
                 <!-- main template for displaying the list items -->
                 <ItemTemplate  id='template1' name='template1'  class='template1'>
                     <Label bindId='numBikes' class='numBikes'></Label>
-                    <Label bindId='stationName' class='stationName'></Label>
+                    <View layout='vertical'>
+                        <Label bindId='stationName' class='stationName'></Label>
+                        <Label bindId='stationDistance' class='stationDistance'></Label>
+                    </View>
                     <Label bindId='eta' class='eta'></Label>
                 </ItemTemplate>
             </Templates>
