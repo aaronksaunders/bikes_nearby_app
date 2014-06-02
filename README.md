@@ -8,7 +8,7 @@ Welcome to Bike Finder
 * Working with HTTP Client
 * Integration of ActionBar on Android
 * Example of dealing for cross-platform UI issues in style and view layout
-* 
+
 ####Remember you will need to setup you Android Map to get this working
 
 See information here on the Appcelerator website
