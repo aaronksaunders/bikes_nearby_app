@@ -1,18 +1,23 @@
-Welcome to your Appcelerator Titanium Mobile Project
+Welcome to Bike Finder: forked from adampash/bikes_nearby_app
+====
 
-This is a blank project.  Start by editing your application's app.js to 
-make your first mobile project using Titanium.
+####Remember you will need to setup you Android Map to get this working
+
+See information here on the Appcelerator website
+http://docs.appcelerator.com/titanium/latest/#!/guide/Google_Maps_v2_for_Android
+
+####Debugger Code was added to force a specific location for testing.
+
+When this function is called, it will default to this location. I added this because I was testing 
+from Washington DC and it is too far to get any data to show
+
+```
+// FOR DEBUGGING
+locate_bikes.setDebugLocation([40.70122128, -74.01234218]);
+```
 
 
 
 ----------------------------------
-Stuff our legal folk make us say:
 
-Appcelerator, Appcelerator Titanium and associated marks and logos are 
-trademarks of Appcelerator, Inc. 
-
-Titanium is Copyright (c) 2008-2013 by Appcelerator, Inc. All Rights Reserved.
-
-Titanium is licensed under the Apache Public License (Version 2). Please
-see the LICENSE file for the full license.
 
