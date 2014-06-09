@@ -6,7 +6,6 @@ Alloy.Backbone.setDomLibrary({
       error : params.error
     };
 
-    //var promise = new Parse.Promise();
     var handled = !1;
     var xhr = Ti.Network.createHTTPClient({
       timeout : 5e3
