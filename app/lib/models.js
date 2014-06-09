@@ -1,6 +1,9 @@
+/**
+ * solution to override the default ajax functionality and substitute in
+ * the defaulte titanium http functionality
+ * /
 Alloy.Backbone.setDomLibrary({
   ajax : function(params) {
-    debugger;
     var options = {
       success : params.success,
       error : params.error
@@ -34,17 +37,34 @@ Alloy.Backbone.setDomLibrary({
   }
 });
 
+/**
+ * @class Model.BikeStation
+ * /
 exports.BikeStation = Alloy.Backbone.Model.extend({
   initialize : function() {
     //alert("Welcome to this BikeStation");
   },
 });
+/**
+ * @class Collection.BikeStationCollection
+ * /
 exports.BikeStationCollection = Alloy.Backbone.Collection.extend({
   model : exports.BikeStation,
+  /**
+   * @private
+   * @method parse
+   * 
+   * @params {Object} _response
+   * /
   parse : function(_response) {
     return _response.stationBeanList;
   },
-  url : function() {
+  /**
+   * @private
+   * @method url
+   * 
+   * /  
+   url : function() {
     return 'http://www.citibikenyc.com/stations/json';
   }
 });
