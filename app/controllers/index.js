@@ -184,7 +184,7 @@ function initialize() {
   });
 
   // update the information periodically, ONLY if it null.
-  // if it is not null then there is an active interval that can 
+  // if it is not null then there is an active interval that can
   // continue toi be utilized
   if (updateIntervalId === null) {
     updateIntervalId = clearRefreshInterval(updateIntervalId);
