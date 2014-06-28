@@ -6,6 +6,7 @@ Welcome to Bike Finder
 * Map View for IOS and Android
 * Working with Geolocation Services
 * Working with HTTP Client
+* Caching Services
 * Integration of ActionBar on Android
 * Example of dealing for cross-platform UI issues in style and view layout
 
